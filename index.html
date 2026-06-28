@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <!-- SEO meta tags for Etsy sellers & developer tools -->
+    <title>CSS Gradient Generator · Etsy SEO & Developer Toolbox</title>
+    <meta name="description" content="Free CSS gradient generator built for Etsy sellers & developers. Create smooth gradients, copy CSS, and boost your Etsy listing SEO with meta tag tools.">
+    <meta name="keywords" content="etsy listing seo, csv to json converter, developer seo meta tag, etsy sellers, csv/json tools, developer tools, developer">
+    <meta name="author" content="Gradient Toolbox">
+    <meta property="og:title" content="CSS Gradient Generator · Etsy SEO & Developer Toolbox">
+    <meta property="og:description" content="Create beautiful CSS gradients, copy code, and access Etsy SEO meta tag helpers. Built for sellers & developers.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CSS Gradient Generator · Etsy SEO & Developer Toolbox">
+    <meta name="twitter:description" content="Create beautiful CSS gradients, copy code, and access Etsy SEO meta tag helpers.">
+    <link rel="canonical" href="https://gradienttoolbox.example.com">
+    <!-- Inline CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f6f9fc;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+        header {
+            text-align: center;
+            padding: 0.5rem 0 1.2rem;
+        }
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #0f172a, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.2rem;
+        }
+        .subhead {
+            font-size: 1rem;
+            color: #475569;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .subhead span {
+            background: #eef2ff;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #2563eb;
+        }
+        .tool-card {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04), 0 2px 6px rgba(0,0,0,0.02);
+            padding: 1.8rem 1.5rem;
+            margin: 1.2rem 0;
+        }
+        .gradient-preview {
+            width: 100%;
+            height: 180px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #f97316, #3b82f6);
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: background 0.2s ease;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 1.5rem;
+            align-items: flex-end;
+        }
+        .control-group {
+            flex: 1 1 160px;
+            min-width: 130px;
+        }
+        .control-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: #64748b;
+            margin-bottom: 0.25rem;
+        }
+        .control-group input[type="color"] {
+            width: 100%;
+            height: 44px;
+            border: 1px solid #d1d5db;
+            border-radius: 40px;
+            background: white;
+            padding: 2px 6px;
+            cursor: pointer;
+        }
+        .control-group input[type="range"] {
+            width: 100%;
+            accent-color: #3b82f6;
+            height: 6px;
+        }
+        .angle-selector {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .angle-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.4rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.1s;
+            border: 1px solid transparent;
+        }
+        .angle-btn.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        .angle-btn:hover {
+            background: #dbeafe;
+        }
+        .output-area {
+            margin-top: 1.8rem;
+        }
+        .css-output {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 1rem 1.2rem;
+            border-radius: 20px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            white-space: pre-wrap;
+            margin-bottom: 0.8rem;
+            border: 1px solid #1e293b;
+        }
+        .copy-btn {
+            background: #0f172a;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: 1px solid #334155;
+        }
+        .copy-btn:hover {
+            background: #1e293b;
+        }
+        .copy-btn:active {
+            transform: scale(0.96);
+        }
+        .ad-placeholder {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            margin: 1.5rem 0 1rem;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        .ad-placeholder strong {
+            color: #0f172a;
+        }
+        .resource-section {
+            background: #f1f5f9;
+            border-radius: 24px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .resource-section p {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        .resource-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+        }
+        .resource-links a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-bottom: 1px solid transparent;
+        }
+        .resource-links a:hover {
+            border-bottom-color: #2563eb;
+        }
+        .privacy-note {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            text-align: center;
+            margin: 2rem 0 0.5rem;
+            padding: 0.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            font-size: 0.75rem;
+            margin: 0.5rem 0 0.2rem;
+        }
+        .footer-links a {
+            color: #64748b;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: #0f172a;
+        }
+        .badge {
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 30px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 0.4rem;
+        }
+        @media (max-width: 500px) {
+            .tool-card {
+                padding: 1.2rem 1rem;
+            }
+            .gradient-preview {
+                height: 140px;
+            }
+            .control-group {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>🎨 Gradient Forge</h1>
+        <div class="subhead">
+            CSS gradient generator <span>Etsy sellers · dev tools</span>
+        </div>
+        <div style="font-size:0.8rem; color:#475569; margin-top:0.2rem;">
+            ⚡ Also try: <a href="#" style="color:#2563eb;">CSV to JSON</a> · <a href="#" style="color:#2563eb;">Meta Tag Builder</a>
+        </div>
+    </header>
+
+    <!-- Main tool card -->
+    <div class="tool-card">
+        <div class="gradient-preview" id="gradientPreview" role="img" aria-label="CSS gradient preview"></div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="color1">Color 1</label>
+                <input type="color" id="color1" value="#f97316">
+            </div>
+            <div class="control-group">
+                <label for="color2">Color 2</label>
+                <input type="color" id="color2" value="#3b82f6">
+            </div>
+            <div class="control-group">
+                <label for="angleRange">Angle: <span id="angleDisplay">135</span>°</label>
+                <input type="range" id="angleRange" min="0" max="360" value="135" step="1">
+            </div>
+            <div class="control-group">
+                <label>Quick angle</label>
+                <div class="angle-selector" id="anglePresets">
+                    <button class="angle-btn" data-angle="0">0</button>
+                    <button class="angle-btn" data-angle="45">45</button>
+                    <button class="angle-btn active" data-angle="135">135</button>
+                    <button class="angle-btn" data-angle="180">180</button>
+                    <button class="angle-btn" data-angle="270">270</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="output-area">
+            <div class="css-output" id="cssOutput">background: linear-gradient(135deg, #f97316, #3b82f6);</div>
+            <button class="copy-btn" id="copyBtn">📋 Copy CSS</button>
+        </div>
+    </div>
+
+    <!-- Ad placeholder (visible) -->
+    <div class="ad-placeholder">
+        <strong>📢 Promote your Etsy shop</strong> · <em>Sponsored</em><br>
+        <span style="font-size:0.8rem;">Grow your listings with SEO‑optimized meta tags & CSV tools. <a href="#" style="color:#2563eb;">Learn more →</a></span>
+    </div>
+
+    <!-- Affiliate / resource section for Etsy sellers & developers -->
+    <div class="resource-section">
+        <div>
+            <p>🔧 Developer & Etsy toolbox</p>
+            <span style="font-size:0.75rem; color:#475569;">Free resources for sellers</span>
+        </div>
+        <div class="resource-links">
+            <a href="#">📊 CSV to JSON</a>
+            <a href="#">🏷️ Meta Tag Generator</a>
+            <a href="#">🔍 Etsy SEO Guide</a>
+            <a href="#">📦 Bulk Listing Tools</a>
+        </div>
+    </div>
+
+    <!-- Privacy note + event reporting (lightweight) -->
+    <div class="privacy-note">
+        <span>🔒 Events may be counted anonymously for product improvement. No personal data collected.</span>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Cookie Notice</a>
+        </div>
+    </div>
+</div>
+
+<!-- Inline vanilla JS -->
+<script>
+    (function() {
+        // DOM refs
+        const color1 = document.getElementById('color1');
+        const color2 = document.getElementById('color2');
+        const angleRange = document.getElementById('angleRange');
+        const angleDisplay = document.getElementById('angleDisplay');
+        const preview = document.getElementById('gradientPreview');
+        const cssOutput = document.getElementById('cssOutput');
+        const copyBtn = document.getElementById('copyBtn');
+        const anglePresets = document.getElementById('anglePresets');
+
+        // Helper: build CSS gradient string
+        function getGradientCSS(c1, c2, angle) {
+            return `background: linear-gradient(${angle}deg, ${c1}, ${c2});`;
+        }
+
+        // Update preview and output
+        function updateGradient() {
+            const c1 = color1.value;
+            const c2 = color2.value;
+            const angle = parseInt(angleRange.value, 10);
+            angleDisplay.textContent = angle;
+
+            const css = getGradientCSS(c1, c2, angle);
+            preview.style.background = css.replace('background: ', '');
+            cssOutput.textContent = css;
+        }
+
+        // Angle preset buttons
+        function initAnglePresets() {
+            const buttons = anglePresets.querySelectorAll('.angle-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const angle = parseInt(this.dataset.angle, 10);
+                    angleRange.value = angle;
+                    // update active class
+                    buttons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    updateGradient();
+                    // report event
+                    reportEvent('angle_preset', { angle: angle });
+                });
+            });
+        }
+
+        // Copy to clipboard
+        function copyCSS() {
+            const code = cssOutput.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const original = copyBtn.innerHTML;
+                copyBtn.innerHTML = '✅ Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = original;
+                }, 1800);
+                reportEvent('copy_css', { gradient: code.substring(0, 60) });
+            }).catch(() => {
+                // fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = code;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                copyBtn.innerHTML = '📋 Copied (fallback)';
+                setTimeout(() => { copyBtn.innerHTML = '📋 Copy CSS'; }, 1800);
+                reportEvent('copy_css_fallback', {});
+            });
+        }
+
+        // Simple event reporter (only if endpoint configured)
+        window.reportEvent = function reportEvent(name, payload = {}) {
+            const endpoint = window.ORGANISM_METRICS_ENDPOINT;
+            if (!endpoint || typeof endpoint !== 'string') return;
+            try {
+                const body = JSON.stringify({ event: name, payload: payload, timestamp: Date.now() });
+                if (navigator.sendBeacon) {
+                    navigator.sendBeacon(endpoint, body);
+                } else {
+                    fetch(endpoint, { method: 'POST', body: body, keepalive: true, mode: 'no-cors' });
+                }
+            } catch (e) {
+                // silently fail
+            }
+        };
+
+        // Wire events
+        color1.addEventListener('input', updateGradient);
+        color2.addEventListener('input', updateGradient);
+        angleRange.addEventListener('input', function() {
+            // remove active class from angle presets
+            anglePresets.querySelectorAll('.angle-btn').forEach(b => b.classList.remove('active'));
+            updateGradient();
+        });
+        copyBtn.addEventListener('click', copyCSS);
+
+        // also update when preset clicked (already handled, but also update active on range)
+        initAnglePresets();
+
+        // initial gradient
+        updateGradient();
+
+        // report tool load (anonymous)
+        reportEvent('gradient_tool_loaded', { source: 'etsy_seller_page' });
+
+        // additional: if user changes color, report (throttled via input)
+        let reportTimer;
+        function reportColorChange() {
+            clearTimeout(reportTimer);
+            reportTimer = setTimeout(() => {
+                reportEvent('color_change', { color1: color1.value, color2: color2.value });
+            }, 600);
+        }
+        color1.addEventListener('input', reportColorChange);
+        color2.addEventListener('input', reportColorChange);
+
+        // Also expose for debugging (no tracking)
+        console.log('🌈 Gradient Tool ready. reportEvent available.');
+    })();
+</script>
+
+<!-- ORGANISM_METRICS_ENDPOINT placeholder (unset by default) -->
+<script>
+    // If you want to enable metrics, set this string to your endpoint.
+    // Example: window.ORGANISM_METRICS_ENDPOINT = 'https://example.com/metrics';
+    // For now it's undefined, so reportEvent will silently skip.
+    window.ORGANISM_METRICS_ENDPOINT = '';  // set to your endpoint or leave empty
+</script>
+
+
+<section data-organism-discovery="hub" style="margin:32px auto 20px;max-width:1040px;padding:16px;border-top:1px solid #d9e2ec;color:#475569;font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <strong style="display:block;color:#0f172a;margin-bottom:6px">More free browser tools</strong>
+  <p style="margin:0 0 8px">This page is part of an autonomous micro-tool network. Explore the live tool directory and related utilities.</p>
+  <p style="margin:0"><a href="https://kingms888.github.io/do-digital-organism-index/" style="color:#0f766e;font-weight:700">Open the tool directory</a> </p>
+</section>
+</body>
+</html>
